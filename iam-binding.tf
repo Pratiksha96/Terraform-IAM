@@ -1,17 +1,18 @@
-# resource "google_service_account_iam_binding" "storage-account-iam" {
-#   service_account_id = "${google_service_account.demo_service_account.name}"
-#   role               = var.role
+resource "google_project_iam_binding" "storage-account-iam" {
+  project = var.project
+  role    = var.role
 
-#   members = [
-#     "demo-service-account@gcp-trial-254611.iam.gserviceaccount.com",
-#   ]
-# }
+  members = [
+    "serviceAccount:${google_service_account.demo_service_account.email}",
+    "user:alkarana1997@gmail.com",
+  ]
+}
 
-# resource "google_service_account_iam_binding" "custom-account-iam" {
-#   service_account_id = "${google_service_account.demo_service_account.name}"
-#   role               = "projects/gcp-trial-254611/roles/myCustomRole"
+resource "google_project_iam_binding" "custom-account-iam" {
+  project = var.project
+  role    = "projects/gcp-trial-254611/roles/myCustomRole"
 
-#   members = [
-#     "demo-service-account@gcp-trial-254611.iam.gserviceaccount.com",
-#   ]
-# }
+  members = [
+    "serviceAccount:${google_service_account.demo_service_account.email}",
+  ]
+}
