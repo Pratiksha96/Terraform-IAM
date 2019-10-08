@@ -1,4 +1,4 @@
 provider "google" {
-    credentials = file("gcp-trial-254611-a5ebbe667431.json")
-    project = var.project
+    credentials = file(var.key_file_name)
+    project = var.project_id
 }
