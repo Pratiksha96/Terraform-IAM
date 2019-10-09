@@ -1,4 +1,0 @@
-resource "google_project_iam_policy" "project" {
-  project = var.project_id
-  policy_data = "${data.google_iam_policy.my-policy_data.policy_data}"
-}

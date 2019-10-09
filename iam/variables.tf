@@ -1,9 +1,3 @@
-variable "key_file_path" {
-    type = "string"
-    description = "Path to your key file"
-    //default = ""
-}
-
 variable "project_id" {
     type = "string"
     description = "ID of the project in which the service account should be created"
@@ -28,20 +22,8 @@ variable "bindings" {
     default = {}
 }
 
-variable "service_account_id" {
-  type = "string"
-  description = "Name of service account to be created"
-  default = ""
-}
-
-variable "service_account_display_name" {
-  type = "string"
-  description = "Display name of service account in human readable format"
-  default = ""
-}
-
-variable "service_account_roles" {
-    type = "list"
-    description = "Roles to be given to service account"
-    default = []
-}
+# variable "key_file_path" {
+#     type = "string"
+#     description = "Path to your key file"
+#     //default = ""
+# }
