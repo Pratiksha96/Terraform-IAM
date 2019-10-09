@@ -16,14 +16,8 @@ variable "roles" {
     default = {}
 }
 
-variable "bindings" {
+variable "iam" {
     type = "map"
     description = "Map of roles where the key is role and value is list of members"
     default = {}
 }
-
-# variable "key_file_path" {
-#     type = "string"
-#     description = "Path to your key file"
-#     //default = ""
-# }

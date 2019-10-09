@@ -22,26 +22,8 @@ variable "roles" {
     default = {}
 }
 
-variable "bindings" {
+variable "iam" {
     type = "map"
     description = "Map of roles where the key is role and value is list of members"
     default = {}
-}
-
-variable "service_account_id" {
-  type = "string"
-  description = "Name of service account to be created"
-  default = ""
-}
-
-variable "service_account_display_name" {
-  type = "string"
-  description = "Display name of service account in human readable format"
-  default = ""
-}
-
-variable "service_account_roles" {
-    type = "list"
-    description = "Roles to be given to service account"
-    default = []
 }

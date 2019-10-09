@@ -1,32 +1,30 @@
 locals {
   project = "${var.project_id}"
-  service_accounts = "${var.service_accounts}"
-  role = "${var.roles}"
-  binding = "${var.bindings}"
-
-  iam_permissions = [
-    for k, v in "${var.bindings}":
-    { "role" = k , "members" = v}
-  ]
+  custom_role = "${keys(var.roles)}"
+  role_permissions = "${values(var.roles)}"
+  iam_role = "${keys(var.iam)}"
+  iam_members = "${values(var.iam)}"
+  account_id = "${keys(var.service_accounts)}"
+  display_name = "${values(var.service_accounts)}"
 }
 
 resource "google_service_account" "self" {
-    count = "${length(local.service_accounts) > 0 ? length(local.service_accounts):0}"
+    count = "${length(var.service_accounts) > 0 ? length(var.service_accounts):0}"
     project = "${local.project}"
-    account_id = "${element(keys(local.service_accounts),count.index)}"
-    display_name = "${element(values(local.service_accounts),count.index)}" 
+    account_id = "${element(local.account_id,count.index)}"
+    display_name = "${element(local.display_name,count.index)}" 
 }
 
 resource "google_project_iam_custom_role" "self" {
-  count = "${length(local.role) > 0 ? length(local.role):0}"
-  role_id = "${element(keys(local.role),count.index)}"
-  title = "${element(keys(local.role),count.index)}"
-  permissions = "${element(values(local.role),count.index)}"
+  count = "${length(var.roles) > 0 ? length(var.roles):0}"
+  role_id = "${element(local.custom_role,count.index)}"
+  title = "${element(local.custom_role,count.index)}"
+  permissions = "${element(local.role_permissions,count.index)}"
 }
 
 resource "google_project_iam_binding" "self" {
-  count = "${length(local.binding) > 0 ? length(local.binding):0}"
+  count = "${length(var.iam) > 0 ? length(var.iam):0}"
   project = "${local.project}"
-  role    = "${element(keys("${local.binding}"),count.index)}"
-  members = "${element(values("${local.binding}"),count.index)}"
+  role    = "${element(local.iam_role,count.index)}"
+  members = "${element(local.iam_members,count.index)}"
 }
