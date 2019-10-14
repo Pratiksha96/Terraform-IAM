@@ -10,7 +10,7 @@ variable "service_accounts" {
         service_account_display_name = string
         service_account_project_id = string
     }))
-    description = "Map of service accounts where the key is the account id and value is human readable and descriptive name"
+    description = "List of service accounts that contains service account id, service account display name and id of project that the service account is present in (default to provider configuration)"
     default = [{
         service_account_id = ""
         service_account_display_name = ""
@@ -27,7 +27,7 @@ variable "roles" {
         stage = string
         description = string
     }))
-    description = "Map of roles where the key is role id and value is list of permissions to given role"
+    description = "List of role object where role id is to use this role, title is human readable title for the role, permissions are list of list of permissions granted for this role, project that service account will be created in (default to provider configuration)"
     default = [{
         role_id = ""
         title = ""
@@ -39,7 +39,15 @@ variable "roles" {
 }
 
 variable "iam" {
-    type = "map"
-    description = "Map of roles where the key is role and value is list of members"
-    default = {}
+    type = list(object({
+        iam_role_id = string
+        iam_members = list(string)
+        project_id = string
+    }))
+    description = "List of roles where iam_role is role id of one role, iam_members is list of members and project id is project name (default to provider configuration)"
+    default = [{
+        iam_role_id = ""
+        iam_members = []
+        project_id = ""
+    }]
 }

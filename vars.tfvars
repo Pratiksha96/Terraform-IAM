@@ -15,13 +15,19 @@ service_accounts = [{
 roles = [{
     role_id = "storageViewer"
     title = "Storage Viewer"
-    permissions = ["roles/storage.list","roles/storage.get"]
+    permissions = ["storage.objects.list","storage.objects.get"]
     project = "gcp-trial-254611"
     description = "Role to view storage."
     stage = "default"
 }]
 
-iam = {"projects/gcp-trial-254611/roles/storage_creation_role"=["serviceAccount:demo-service-account-1@gcp-trial-254611.iam.gserviceaccount.com"], 
-"projects/gcp-trial-254611/roles/storage_access_role"=["serviceAccount:demo-service-account-2@gcp-trial-254611.iam.gserviceaccount.com"] 
-"roles/compute.admin"=["serviceAccount:demo-service-account-3@gcp-trial-254611.iam.gserviceaccount.com"], "roles/iam.serviceAccountAdmin"=["serviceAccount:demo-service-account-4@gcp-trial-254611.iam.gserviceaccount.com"]
+iam = [{
+    iam_role_id = "roles/compute.admin"
+    iam_members = ["serviceAccount:demo-service-account-1@gcp-trial-254611.iam.gserviceaccount.com"]
+    project_id = "gcp-trial-254611"
+},{
+    iam_role_id = "projects/gcp-trial-254611/roles/storageViewer"
+    iam_members = ["serviceAccount:demo-service-account-1@gcp-trial-254611.iam.gserviceaccount.com"]
+    project_id = "gcp-trial-254611"
 }
+]

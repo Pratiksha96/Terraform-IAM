@@ -5,4 +5,3 @@ module "iam-management"{
   iam = "${var.iam}"
   roles = "${var.roles}"
 }
-
