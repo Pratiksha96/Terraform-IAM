@@ -1,25 +1,23 @@
 locals {
   project = "${var.project_id}"
-  custom_role = "${keys(var.roles)}"
-  role_permissions = "${values(var.roles)}"
   iam_role = "${keys(var.iam)}"
   iam_members = "${values(var.iam)}"
-  account_id = "${keys(var.service_accounts)}"
-  display_name = "${values(var.service_accounts)}"
 }
 
-resource "google_service_account" "default" {
-    count = "${length(var.service_accounts) > 0 ? length(var.service_accounts):0}"
-    project = "${local.project}"
-    account_id = "${element(local.account_id,count.index)}"
-    display_name = "${element(local.display_name,count.index)}" 
+resource "google_service_account" "self" {
+  count = "${length(var.service_accounts) > 0 ? length(var.service_accounts):0}"
+  account_id = var.service_accounts[count.index].service_account_id
+  display_name = var.service_accounts[count.index].service_account_display_name
+  project = var.service_accounts[count.index].service_account_project_id  
 }
 
 resource "google_project_iam_custom_role" "self" {
   count = "${length(var.roles) > 0 ? length(var.roles):0}"
-  role_id = "${element(local.custom_role,count.index)}"
-  title = "${element(local.custom_role,count.index)}"
-  permissions = "${element(local.role_permissions,count.index)}"
+  role_id = var.roles[count.index].role_id
+  title = var.roles[count.index].title
+  permissions = var.roles[count.index].permissions
+  project = var.roles[count.index].project
+  description = var.roles[count.index].description
 }
 
 resource "google_project_iam_binding" "self" {

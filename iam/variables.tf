@@ -5,15 +5,37 @@ variable "project_id" {
 }
 
 variable "service_accounts" {
-    type = "map"
+    type = list(object({
+        service_account_id = string
+        service_account_display_name = string
+        service_account_project_id = string
+    }))
     description = "Map of service accounts where the key is the account id and value is human readable and descriptive name"
-    default = {}
+    default = [{
+        service_account_id = ""
+        service_account_display_name = ""
+        service_account_project_id = ""
+    }]
 }
 
 variable "roles" {
-    type = "map"
+    type = list(object({
+        role_id = string
+        title = string
+        permissions = list(string)
+        project = string
+        stage = string
+        description = string
+    }))
     description = "Map of roles where the key is role id and value is list of permissions to given role"
-    default = {}
+    default = [{
+        role_id = ""
+        title = ""
+        permissions = []
+        project = ""
+        stage = "GA"
+        description = ""
+    }]
 }
 
 variable "iam" {

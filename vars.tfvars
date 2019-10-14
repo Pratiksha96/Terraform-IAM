@@ -6,9 +6,20 @@ region = "us-central1"
 
 zone = "us-central1-c"
 
-service_accounts = {"demo-service-account-1"="Has storage creation access","demo-service-account-2"="Has access to GCS storage","demo-service-account-3"="Has roles to provision compute engine","demo-service-account-4"="Roles to create SA and create Role Association"}
+service_accounts = [{
+    service_account_id = "demo-service-account-1"
+    service_account_display_name = "Has storage creation access"
+    service_account_project_id = "gcp-trial-254611"
+}]
 
-roles = {"storage_creation_role"=["storage.buckets.create","storage.objects.create"],"storage_access_role"=["storage.buckets.get","storage.buckets.list","storage.objects.get","storage.objects.list"]}
+roles = [{
+    role_id = "storageViewer"
+    title = "Storage Viewer"
+    permissions = ["roles/storage.list","roles/storage.get"]
+    project = "gcp-trial-254611"
+    description = "Role to view storage."
+    stage = "default"
+}]
 
 iam = {"projects/gcp-trial-254611/roles/storage_creation_role"=["serviceAccount:demo-service-account-1@gcp-trial-254611.iam.gserviceaccount.com"], 
 "projects/gcp-trial-254611/roles/storage_access_role"=["serviceAccount:demo-service-account-2@gcp-trial-254611.iam.gserviceaccount.com"] 
