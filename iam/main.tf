@@ -27,7 +27,7 @@ resource "google_project_iam_binding" "self" {
     google_service_account.self
   ]
 }
-output "service-account" {
+output "service-account-email" {
   value = "${google_service_account.self.*.email}"
 }
 output "iam-binding-roles" {
