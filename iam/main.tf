@@ -8,7 +8,7 @@ locals {
   display_name = "${values(var.service_accounts)}"
 }
 
-resource "google_service_account" "self" {
+resource "google_service_account" "default" {
     count = "${length(var.service_accounts) > 0 ? length(var.service_accounts):0}"
     project = "${local.project}"
     account_id = "${element(local.account_id,count.index)}"

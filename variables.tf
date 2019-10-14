@@ -10,6 +10,16 @@ variable "project_id" {
     default = ""
 }
 
+variable "region" {
+    type = "string"
+    default = ""
+}
+
+variable "zone" {
+    type = "string"
+    default = ""
+}
+
 variable "service_accounts" {
     type = "map"
     description = "Map of service accounts where the key is the account id and value is human readable and descriptive name"
