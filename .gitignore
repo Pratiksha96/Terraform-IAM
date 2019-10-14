@@ -12,3 +12,5 @@
 
 # .tfbackend file
 *.tfbackend
+terraform.tfstate 
+!terraform.tfstate 
