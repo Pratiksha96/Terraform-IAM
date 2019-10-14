@@ -21,9 +21,13 @@ variable "zone" {
 }
 
 variable "service_accounts" {
-    type = "map"
+    type = list(object({
+        service_account_id = "string"
+        service_account_display_name = "string"
+        project_id = "string"
+    }))
     description = "Map of service accounts where the key is the account id and value is human readable and descriptive name"
-    default = {}
+    default = []
 }
 
 variable "roles" {

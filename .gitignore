@@ -1,10 +1,14 @@
-.git/
-.terraform/
+#local .terraform directories
+**.terraform/*
+
+# .tfstate files
 *.tfstate
-*.tfstate.backup
+*.tfstate.*
+
+# credentials file
 *.json
-terraform.tfstate
-./*.tfstate
+
 *.log
+
+# .tfbackend file
 *.tfbackend
-terraform.tfbackend
