@@ -38,7 +38,7 @@ variable "roles" {
     }]
 }
 
-variable "iam" {
+variable "iam_binding" {
     type = list(object({
         iam_role_id = string
         iam_members = list(string)

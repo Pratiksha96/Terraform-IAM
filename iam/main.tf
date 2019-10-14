@@ -18,12 +18,24 @@ resource "google_project_iam_custom_role" "self" {
 
 // resource to provision user defined IAM Binding in a project
 resource "google_project_iam_binding" "self" {
-  count = "${length(var.iam) > 0 ? length(var.iam):0}"
-  project = var.iam[count.index].project_id
-  role    = var.iam[count.index].iam_role_id
-  members = var.iam[count.index].iam_members
+  count = "${length(var.iam_binding) > 0 ? length(var.iam_binding):0}"
+  project = var.iam_binding[count.index].project_id
+  role    = var.iam_binding[count.index].iam_role_id
+  members = var.iam_binding[count.index].iam_members
 
   depends_on = [
     google_service_account.self
   ]
+}
+output "service-account" {
+  value = "${google_service_account.self.*.email}"
+}
+output "iam-binding-roles" {
+  value = "${google_project_iam_binding.self.*.role}"
+}
+output "iam-binding-members" {
+  value = "${google_project_iam_binding.self.*.members}"
+}
+output "iam-custom-role" {
+  value = "${google_project_iam_custom_role.self.*.role_id}"
 }
