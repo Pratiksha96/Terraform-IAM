@@ -8,13 +8,13 @@ variable "service_accounts" {
     type = list(object({
         service_account_id = string
         service_account_display_name = string
-        service_account_project_id = string
+        //service_account_project_id = string
     }))
     description = "List of service accounts that contains service account id, service account display name and id of project that the service account is present in (default to provider configuration)"
     default = [{
         service_account_id = ""
         service_account_display_name = ""
-        service_account_project_id = ""
+        //service_account_project_id = ""
     }]
 }
 
@@ -23,7 +23,7 @@ variable "roles" {
         role_id = string
         title = string
         permissions = list(string)
-        project = string
+        //project = string
         stage = string
         description = string
     }))
@@ -32,7 +32,7 @@ variable "roles" {
         role_id = ""
         title = ""
         permissions = []
-        project = ""
+        //project = ""
         stage = "GA"
         description = ""
     }]
@@ -42,12 +42,12 @@ variable "iam_binding" {
     type = list(object({
         iam_role_id = string
         iam_members = list(string)
-        project_id = string
+        //project_id = string
     }))
     description = "List of roles where iam_role is role id of one role, iam_members is list of members and project id is project name (default to provider configuration)"
     default = [{
         iam_role_id = ""
         iam_members = []
-        project_id = ""
+        //project_id = ""
     }]
 }
